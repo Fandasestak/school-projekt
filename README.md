@@ -1,1 +1,1 @@
-# school-projekt
+Welcome to my page, with school projects, here you can also get inspired by programming ideas in HTML, CSS, JS, or completely copy school projects. have a great time and good luck and success in your programming. 🥇
