@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="cz">
+
+<head>
+    <title> BMI kalkulačka</title>
+    <link rel="stylesheet" href="style-BMIkalkulacka.css">
+    <script src="script-BMIkalkulacka.js"></script>
+</head>
+
+</html>
+<body>
+<div class="all">
+
+    <body style="background-color: black;">
+
+        <h1 style="color:rgb(0, 78, 247)">Kalkulačka</h1>
+        <div class="kalkulacka">
+            <div class="vypocet">
+                <button onclick="myKalkulacka()" style="color:rgb(0, 78, 247)">Výsledek 🖩</button>
+            </div>
+            <br>
+            <br>
+            <form id="myRESET">
+                <input type="number" id="výška" placeholder="(m)" style="color:rgb(0, 78, 247)">
+                <br>
+                <br>
+                <input type="number" id="váha" placeholder="(kg)" style="color:rgb(0, 78, 247)">
+                <br>
+                <br>
+                <button onclick="myRestart()" value="Reset">❌</button>
+                <br>
+                <p id="result" style="color:aqua">_ _ _ _ _ _</p>
+                <br>
+                <p style="color:rgb(0, 78, 247)"><b>Historie BMI:</b></p>
+                <p id="iuserData" style="color:grey">></p>
+            </form>
+        </div>
+    </body>
+
+<!-- style cods:  -->
+<style>
+    .kalkulacka button:hover{
+    box-shadow: 2px 3px 1px 5   px rgba(255,255,255,0.75);
+    -webkit-box-shadow: 2px 1px 5px 0px rgba(255,255,255,0.75);
+    -moz-box-shadow: 2px 3px 1px 5px rgba(255,255,255,0.75);
+}
+.kalkulacka input {
+    display: table-column;
+}
+.all {
+    text-align: center;
+}
+.vypocet {
+    justify-content:center;
+}
+</style>
+<!--  -->
+
+<!-- Javascript cods:  -->
+<script>
+    const userData = []
+function myKalkulacka() {
+    const iKalkulacka = parseFloat(document.getElementById("výška").value);
+    const iKalkulacka2 = parseFloat(document.getElementById("váha").value);
+ 
+    const BMI = iKalkulacka2 / (iKalkulacka * iKalkulacka);
+    document.getElementById("result").innerHTML = " BMI: " + BMI.toFixed(1);
+ 
+    if (BMI < 18.5) {
+        document.getElementById("result").innerHTML = "Měl bys více jíst";
+        userData.push("Podváha")
+    } else if (BMI >= 18.5 && BMI < 25) {
+        document.getElementById("result").innerHTML = "Udržuj si tuhle váhu";
+        userData.push("normální váha")
+    } else if (BMI >= 25 && BMI < 30) {
+        document.getElementById("result").innerHTML = "Přestaň tolik jíst";
+        userData.push("nadváha")
+    } else if (BMI > 30) {
+        document.getElementById("obezita").innerHTML = "začni cvičit";
+        userData.push("obezita")
+    }
+ 
+    console.log(userData)
+    document.getElementById("iuserData").innerHTML = userData
+}
+ function myRestart(){
+    document.getElementById("myRESET").reset();
+}
+</script>
+<!--  -->
+
+
+
+
+</div>
+</body>
+</html>

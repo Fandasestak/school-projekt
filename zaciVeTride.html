@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Správa žáků ve třídě</title>
+    <script src="sprava.js"></script>
+    <link rel="stylesheet" href="style-sprava.css">
+   
+</head>
+ 
+<body>
+ <!-- HTML cods:  -->
+    <div class="all">
+ 
+        <div class="style">
+            <input id="myInput" type="text"placeholder="Jméno, Příjmení">
+            <button onclick="addStudent()">Add</button>
+        </div>
+ 
+        <ul id="myList">
+        </ul>
+   
+        <div class="myClass">
+            <button id="editButton" onclick="myEdit()" class="btn btn-warning">Upravit</button>
+            <button onclick="deleteItems()">Smazat</button>
+        </div>
+    </div>
+    <!--  -->
+
+    <!-- CSS cods:  -->
+    <style>
+        .style, .myClass {
+    outline:none;
+    text-align: center;
+    padding: 10px;
+    margin: -5px;
+}
+ .myClass {
+    outline: none;
+    color:black;
+    background-color:rgba(128, 128, 128, 0.534);
+    border-radius: 9Px;
+    padding: 10px;
+}
+.style input, .style button:hover  {
+    outline:none;
+    color:red;
+    text-align: center;
+    border-color:red;
+    background: none;
+    border-top: none;
+    border-left:none;
+    border-right:none;
+ 
+}   
+.style button {
+    outline: none;
+    color:red;
+    background: none;
+    border:none;
+}
+.style button:hover{
+    border-bottom: 25px;
+}
+ul, .myClass button {
+    display: inline;
+    border-radius: 23px;
+    background: none;
+}
+.inClass {
+    background-color: grey;
+    border:25px;
+    border-color:red
+}
+.myClass button {
+    color:red;
+    border-color:red;
+}
+ul{
+    text-align: center;
+    border: 25px;
+    border-color:red;
+    animation:both;
+}
+    </style>
+    <!--  -->
+ 
+    <!-- Javascript cods:  -->
+    <script>
+        const items = [];
+let isEditing = false;
+function addStudent() {
+    const itemInput = document.getElementById("myInput");
+    const itemList = document.getElementById("myList");
+ 
+    const newItemText = itemInput.value.trim();
+ 
+ 
+ 
+    if (newItemText !== "") {
+        if (!items.some(item => item.text === newItemText)) {
+            const newItem = {
+                text: newItemText,
+                count: 1
+            };
+            items.push(newItem);
+ 
+            const listItem = document.createElement("li");
+            listItem.style.textAlign = "left";
+            listItem.style.color = "black";
+            listItem.style.margin = "25px";
+            listItem.style.backgground = "grey";
+            listItem.style.padding = "1px";
+
+
+            const deleteButton = document.createElement("button");
+            deleteButton.style.display = "inline";
+            deleteButton.style.margin = "25px";
+            deleteButton.innerText = "X";
+            deleteButton.style.background = "none";
+            deleteButton.style.borderRadius = "50px";
+            deleteButton.style.borderColor = "red";
+            deleteButton.style.color = "red";
+            deleteButton.onclick = function () {
+                deleteItem(listItem, newItem);
+            };
+          
+           
+ 
+            listItem.innerHTML = `<span>${newItem.text}  ( ${newItem.count})</span>`;
+           
+ 
+ 
+            listItem.appendChild(deleteButton);
+ 
+            itemList.appendChild(listItem);
+ 
+ 
+            itemInput.value = "";
+        }
+ 
+       
+ 
+    }
+}
+ 
+function updateItemCount(item) {
+    const itemList = document.getElementById("itemList");
+    const itemsElements = itemList.getElementsByTagName("li");
+    for (let i = 0; i < itemsElements.length; i++) {
+        const listItem = itemsElements[i];
+        if (listItem.textContent.includes(item.text)) {
+            listItem.innerHTML = `<span>${item.text} ( ${item.count})</span>`;
+        }
+    }
+}
+ 
+function myEdit() {
+    const editButton = document.getElementById("editButton");
+    editButton.style.color = "red";
+    editButton.style.borderColor = "red";
+    
+    if (isEditing) {
+        isEditing = false;
+        editButton.innerText = "Upravit";
+ 
+        const itemList = document.getElementById("myList");
+        const items = itemList.getElementsByTagName("li");
+        for (let i = 0; i < items.length; i++) {
+            const listItem = items[i];
+            listItem.contentEditable = false;
+            listItem.style.border = "none";
+        }
+    } else {
+        isEditing = true;
+        editButton.innerText = "Konec";
+        editButton.style.color = "green";
+        editButton.style.borderColor = "green"
+ 
+        const itemList = document.getElementById("myList");
+        const items = itemList.getElementsByTagName("li");
+        for (let i = 0; i < items.length; i++) {
+            const listItem = items[i];
+            listItem.contentEditable = true;
+            listItem.style.border = "1px solid #ccc";
+        }
+    }
+}
+ 
+function deleteItem(item, itemObject) {
+    const itemList = document.getElementById("myList");
+ 
+    const index = items.indexOf(itemObject);
+    if (index !== -1) {
+        items.splice(index, 1);
+    }
+ 
+    itemList.removeChild(item);
+}
+ 
+function deleteItems() {
+    const itemList = document.getElementById("myList");
+    itemList.innerHTML = "";
+    items.length = 0;
+}
+    </script>
+    <!--  -->
+</body>
+ 
+</html>

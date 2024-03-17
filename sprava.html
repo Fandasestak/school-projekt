@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> zásoby </title>
+</head>
+<body>
+    <!-- HTML  -->
+    <h1 id="produkty">.</h1>
+    <button onclick="result()">zmackni</button>
+<!--  -->
+
+<!-- Javascript cods:  -->
+<script>
+    const produkty = [
+    { nazev: "Tužka", cenaZaKus: 10, pocetNaSklade: 100 },
+    { nazev: "Sešit", cenaZaKus: 20, pocetNaSklade: 150 },
+    { nazev: "Batoh", cenaZaKus: 500, pocetNaSklade: 50 },
+    { nazev: "Pravítko", cenaZaKus: 30, pocetNaSklade: 75 },
+    { nazev: "Pero", cenaZaKus: 40, pocetNaSklade: 200 },
+    { nazev: "Kalkulačka", cenaZaKus: 200, pocetNaSklade: 30 },
+    { nazev: "Barvy", cenaZaKus: 150, pocetNaSklade: 80 },
+    { nazev: "Štětce", cenaZaKus: 60, pocetNaSklade: 120 },
+    { nazev: "Ležidlo", cenaZaKus: 300, pocetNaSklade: 40 },
+    { nazev: "Mapa světa", cenaZaKus: 180, pocetNaSklade: 60 }
+];
+function result() {
+
+    const produktyElement = document.getElementById("produkty")
+    
+    produktyElement.innerHTML = `<ul>${produkty.map(produkt => `<li>${produkt.nazev} - Cena: ${produkt.cenaZaKus} - Skladem: ${produkt.pocetNaSklade}</li>`).join('')}</ul>`;
+
+
+    
+}
+</script>
+<!--  -->
+
+
+</body>
+</html>
